@@ -60,7 +60,6 @@ $user_name = 'Руслан Шевченко'; // укажите здесь ва�
                         </a>
                     </li>
                 </ul>
-
                 <!-- здесь должен быть PHP код, который показывает следующий тег по условию -->
                 <ul class="header__user-nav">
                     <li class="header__profile">
@@ -70,7 +69,7 @@ $user_name = 'Руслан Шевченко'; // укажите здесь ва�
                             </div>
                             <div class="header__profile-name">
                                 <span>
-                                   Руслан Шевченко
+                                   <?php echo($user_name); ?>
                                 </span>
                                 <svg class="header__link-arrow" width="10" height="6">
                                     <use xlink:href="#icon-arrow-right-ad"></use>
@@ -111,8 +110,8 @@ $user_name = 'Руслан Шевченко'; // укажите здесь ва�
                         <a class="header__post-button button button--transparent" href="adding-post.html">Пост</a>
                     </li>
                 </ul>
-                <?php endif; ?>
             </nav>
+            <?php endif; ?>
         </div>
     </div>
 </header>
