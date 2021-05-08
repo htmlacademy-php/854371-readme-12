@@ -4,42 +4,69 @@ $is_auth = rand(0, 1);
 $user_name = 'Руслан Шевченко'; // укажите здесь ваше имя
 
 $data_cards = [
-    "card_one" => [
-        "title" => "Цитата",
-        "type" => "post-quote",
-        "content" => "Мы в жизни любим только раз, а после ищем лишь похожих",
-        "user_name" => "Лариса",
-        "path_avatar" => "userpic-larisa-small.jpg"
+    'card_one' => [
+        'title' => 'Цитата',
+        'type' => 'post-quote',
+        'content' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
+        'user_name' => 'Лариса',
+        'path_avatar' => 'userpic-larisa-small.jpg'
     ],
-    "card_two" => [
-        "title" => "Игра престолов",
-        "type" => "post-text",
-        "content" => "Не могу дождаться начала финального сезона своего любимого сериала!",
-        "user_name" => "Владик",
-        "path_avatar" => "userpic.jpg"
+    'card_two' => [
+        'title' => 'Игра престолов',
+        "type" => 'post-text',
+        'content' => 'Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала! Не могу дождаться начала финального сезона своего любимого сериала!',
+        'user_name' => 'Владик',
+        'path_avatar' => 'userpic.jpg'
     ],
-    "card_three" => [
-        "title" => "Наконец, обработал фотки!",
-        "type" => "post-photo",
-        "content" => "rock-medium.jpg",
-        "user_name" => "Виктор",
-        "path_avatar" => "userpic-mark.jpg"
+    'card_three' => [
+        'title' => 'Наконец, обработал фотки!',
+        'type' => 'post-photo',
+        'content' => 'rock-medium.jpg',
+        'user_name' => 'Виктор',
+        'path_avatar' => 'userpic-mark.jpg'
     ],
-    "card_four" => [
-        "title" => "Моя мечта",
-        "type" => "post-photo",
-        "content" => "coast-medium.jpg",
-        "user_name" => "Лариса",
-        "path_avatar" => "userpic-larisa-small.jpg"
+    'card_four' => [
+        'title' => 'Моя мечта',
+        'type' => 'post-photo',
+        'content' => 'coast-medium.jpg',
+        'user_name' => 'Лариса',
+        'path_avatar' => 'userpic-larisa-small.jpg'
     ],
-    "card_five" => [
-        "title" => "Лучшие курсы",
-        "type" => "post-link",
-        "content" => "www.htmlacademy.ru",
-        "user_name" => "Владик",
-        "path_avatar" => "userpic.jpg"
+    'card_five' => [
+        'title' => 'Лучшие курсы',
+        'type' => 'post-link',
+        'content' => 'www.htmlacademy.ru',
+        'user_name' => 'Владик',
+        'path_avatar' => 'userpic.jpg'
     ]
 ];
+
+$arr_len = [];
+$thrim_cut = 0;
+
+function process_text($text, $length = 300)
+{
+    $explode_text = explode(" ", $text);
+    foreach ($explode_text as $val) {
+        $arr_characters_word[] = mb_strlen($val);
+        $sum_symbols += mb_strlen($val);
+    }
+    if ($sum_symbols < $length) {
+        echo $text;
+    } else {
+        for ($i = 0, $c = 0; $c < $length; $i++) {
+            $c = $c + $arr_characters_word[$i];
+            $thrim_cut = $i;
+        }
+
+        $text_value = $thrim_cut;
+
+        $truncated_text = array_slice($explode_text, 0, $text_value);
+        $final_text = implode(" ", $truncated_text);
+        echo $final_text . ' ... ' . '<a class="post-text__more-link" href="#">Читать далее</a>';
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -329,96 +356,100 @@ $data_cards = [
             </div>
         </div>
         <div class="popular__posts">
-<!----------------------------------------------------------------------------------------------------------->
             <?php foreach ($data_cards as $key => $val): ?>
-            <article class="popular__post post <?php echo $val["type"];?>">
-                <header class="post__header">
-                    <h2>
-                        <?php echo $val["title"];?>
-                    </h2>
-                </header>
-                <div class="post__main">
-                    <?php if ($val["type"] === "post-quote"): ?>
-                        <blockquote>
+                <article class="popular__post post <?php echo $val['type']; ?>">
+                    <header class="post__header">
+                        <h2>
+                            <?php echo $val['title']; ?>
+                        </h2>
+                    </header>
+                    <div class="post__main">
+                        <?php if ($val['type'] === 'post-quote'): ?>
+                            <blockquote>
+                                <p>
+                                    <?php echo $val['content'] ?>
+                                </p>
+                                <cite>Неизвестный Автор</cite>
+                            </blockquote>
+                        <?php elseif ($val['type'] === 'post-text'): ?>
                             <p>
-                                <?php echo $val["content"]?>
+                                <?php process_text($val['content']) ?>
                             </p>
-                            <cite>Неизвестный Автор</cite>
-                        </blockquote>
-                    <?php elseif ($val["type"] === "post-text"): ?>
-                        <p>
-                            <?php echo $val["content"]?>
-                        </p>
-                    <?php elseif ($val["type"] === "post-photo"): ?>
-                        <div class="post-photo__image-wrapper">
-                            <img src="img/<?php echo $val["content"]?>" alt="Фото от пользователя" width="360" height="240">
-                        </div>
-                    <?php elseif ($val["type"] === "post-link"): ?>
-                        <div class="post-link__wrapper">
-                            <a class="post-link__external" href="http://<?php echo $val["content"];?>" title="Перейти по ссылке">
-                                <div class="post-link__info-wrapper">
-                                    <div class="post-link__icon-wrapper">
-                                        <img src="https://www.google.com/s2/favicons?domain=vitadental.ru" alt="Иконка">
+                        <?php elseif ($val['type'] === 'post-photo'): ?>
+                            <div class="post-photo__image-wrapper">
+                                <img src="img/<?php echo $val['content'] ?>" alt="Фото от пользователя" width="360"
+                                     height="240">
+                            </div>
+                        <?php elseif ($val['type'] === 'post-link'): ?>
+                            <div class="post-link__wrapper">
+                                <a class="post-link__external" href="http://<?php echo $val['content']; ?>"
+                                   title="Перейти по ссылке">
+                                    <div class="post-link__info-wrapper">
+                                        <div class="post-link__icon-wrapper">
+                                            <img src="https://www.google.com/s2/favicons?domain=vitadental.ru"
+                                                 alt="Иконка">
+                                        </div>
+                                        <div class="post-link__info">
+                                            <h3><?php echo $val['title']; ?></h3>
+                                        </div>
                                     </div>
-                                    <div class="post-link__info">
-                                        <h3><?php echo $val["title"];?></h3>
-                                    </div>
+                                    <span><?php echo $val['content']; ?></span>
+                                </a>
+                            </div>
+                        <?php elseif ($val['type'] === 'post-video'): ?>
+                            <div class="post-video__block">
+                                <div class="post-video__preview">
+                                    <?= embed_youtube_cover($val['content']); ?>
+                                    <img src="img/coast-medium.jpg" alt="Превью к видео" width="360" height="188">
                                 </div>
-                                <span><?php echo $val["content"];?></span>
-                            </a>
-                        </div>
-                    <?php elseif ($val["type"] === "post-video"): ?>
-                        <div class="post-video__block">
-                            <div class="post-video__preview">
-                                <?= embed_youtube_cover($val["content"]); ?>
-                                <img src="img/coast-medium.jpg" alt="Превью к видео" width="360" height="188">
+                                <a href="post-details.html" class="post-video__play-big button">
+                                    <svg class="post-video__play-big-icon" width="14" height="14">
+                                        <use xlink:href="#icon-video-play-big"></use>
+                                    </svg>
+                                    <span class="visually-hidden">Запустить проигрыватель</span>
+                                </a>
                             </div>
-                            <a href="post-details.html" class="post-video__play-big button">
-                                <svg class="post-video__play-big-icon" width="14" height="14">
-                                    <use xlink:href="#icon-video-play-big"></use>
-                                </svg>
-                                <span class="visually-hidden">Запустить проигрыватель</span>
-                            </a>
-                        </div>
-                    <?php endif;?>
-                </div>
-                <footer class="post__footer">
-                    <div class="post__author">
-                        <a class="post__author-link" href="#" title="Автор">
-                            <div class="post__avatar-wrapper">
-                                <img class="post__author-avatar" src="img/<?php echo $val["path_avatar"];?>" alt="Аватар пользователя">
-                            </div>
-                            <div class="post__info">
-                                <b class="post__author-name"><?php echo $val["user_name"];?></b>
-                                <time class="post__time" datetime="">дата</time>
-                            </div>
-                        </a>
+                        <?php endif; ?>
                     </div>
-                    <div class="post__indicators">
-                        <div class="post__buttons">
-                            <a class="post__indicator post__indicator--likes button" href="#" title="Лайк">
-                                <svg class="post__indicator-icon" width="20" height="17">
-                                    <use xlink:href="#icon-heart"></use>
-                                </svg>
-                                <svg class="post__indicator-icon post__indicator-icon--like-active" width="20"
-                                     height="17">
-                                    <use xlink:href="#icon-heart-active"></use>
-                                </svg>
-                                <span>0</span>
-                                <span class="visually-hidden">количество лайков</span>
-                            </a>
-                            <a class="post__indicator post__indicator--comments button" href="#" title="Комментарии">
-                                <svg class="post__indicator-icon" width="19" height="17">
-                                    <use xlink:href="#icon-comment"></use>
-                                </svg>
-                                <span>0</span>
-                                <span class="visually-hidden">количество комментариев</span>
+                    <footer class="post__footer">
+                        <div class="post__author">
+                            <a class="post__author-link" href="#" title="Автор">
+                                <div class="post__avatar-wrapper">
+                                    <img class="post__author-avatar" src="img/<?php echo $val['path_avatar']; ?>"
+                                         alt="Аватар пользователя">
+                                </div>
+                                <div class="post__info">
+                                    <b class="post__author-name"><?php echo $val['user_name']; ?></b>
+                                    <time class="post__time" datetime="">дата</time>
+                                </div>
                             </a>
                         </div>
-                    </div>
-                </footer>
-            </article>
-            <?php endforeach;?>
+                        <div class="post__indicators">
+                            <div class="post__buttons">
+                                <a class="post__indicator post__indicator--likes button" href="#" title="Лайк">
+                                    <svg class="post__indicator-icon" width="20" height="17">
+                                        <use xlink:href="#icon-heart"></use>
+                                    </svg>
+                                    <svg class="post__indicator-icon post__indicator-icon--like-active" width="20"
+                                         height="17">
+                                        <use xlink:href="#icon-heart-active"></use>
+                                    </svg>
+                                    <span>0</span>
+                                    <span class="visually-hidden">количество лайков</span>
+                                </a>
+                                <a class="post__indicator post__indicator--comments button" href="#"
+                                   title="Комментарии">
+                                    <svg class="post__indicator-icon" width="19" height="17">
+                                        <use xlink:href="#icon-comment"></use>
+                                    </svg>
+                                    <span>0</span>
+                                    <span class="visually-hidden">количество комментариев</span>
+                                </a>
+                            </div>
+                        </div>
+                    </footer>
+                </article>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
