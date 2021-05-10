@@ -1,7 +1,7 @@
 # Личный проект «Readme»
 
 * Студент: [Руслан  Шевченко](https://up.htmlacademy.ru/php/12/user/854371).
-* Наставник: [Ярослав Иванов](https://htmlacademy.ru/profile/id1451525).
+* Наставник: [Александр Челноков](https://htmlacademy.ru/profile/id997687).
 
 ---
 
